@@ -17,7 +17,7 @@ def test_get_activities_returns_activity_mapping(client):
 def test_get_activities_contains_expected_fields(client):
     # Arrange
     path = "/activities"
-    required_fields = {"description", "schedule", "max_participants", "participants"}
+    required_fields = {"description", "schedule", "max_participants", "participants", "waitlist"}
 
     # Act
     response = client.get(path)

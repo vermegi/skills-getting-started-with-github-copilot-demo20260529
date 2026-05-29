@@ -48,15 +48,47 @@ document.addEventListener("DOMContentLoaded", () => {
           `
           : '<p class="participants-empty">No participants yet. Be the first to sign up.</p>';
 
+        const waitlistSection = details.waitlist && details.waitlist.length
+          ? `
+            <div class="waitlist-section">
+              <p class="participants-title"><strong>Waitlist</strong></p>
+              <ul class="participants-list">
+                ${details.waitlist
+                  .map(
+                    (person) => `
+                      <li class="participant-item">
+                        <span class="participant-email">${person}</span>
+                        <button
+                          type="button"
+                          class="participant-remove"
+                          data-activity="${encodeURIComponent(name)}"
+                          data-email="${encodeURIComponent(person)}"
+                          aria-label="Remove ${person} from waitlist"
+                          title="Remove ${person} from waitlist"
+                        >
+                          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v8h-2V9zm4 0h2v8h-2V9zM7 9h2v8H7V9zm1 12h8a2 2 0 0 0 2-2V9H6v10a2 2 0 0 0 2 2z"/>
+                          </svg>
+                        </button>
+                      </li>
+                    `
+                  )
+                  .join("")}
+              </ul>
+            </div>
+          `
+          : "";
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>Availability:</strong> ${spotsLeft > 0 ? spotsLeft + " spots left" : "Full"}</p>
           <div class="participants-section">
             <p class="participants-title"><strong>Participants</strong></p>
             ${participantsList}
           </div>
+          ${waitlistSection}
         `;
 
         activitiesList.appendChild(activityCard);
