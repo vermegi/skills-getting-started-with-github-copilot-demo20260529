@@ -25,12 +25,35 @@ A super simple FastAPI application that allows students to view and sign up for 
    - API documentation: http://localhost:8000/docs
    - Alternative documentation: http://localhost:8000/redoc
 
+## Running Backend Tests
+
+The backend tests are located in the top-level `tests/` directory and use `pytest`.
+
+1. Install dependencies:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+2. Run all tests:
+
+   ```
+   pytest
+   ```
+
+3. Run specific endpoint test files:
+
+   ```
+   pytest tests/test_signup.py tests/test_unregister.py
+   ```
+
 ## API Endpoints
 
 | Method | Endpoint                                                          | Description                                                         |
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/participants?email=student@mergington.edu` | Unregister from an activity                                         |
 
 ## Data Model
 
